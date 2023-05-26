@@ -1,8 +1,7 @@
 FROM golang:1.20-alpine
 WORKDIR /app
-COPY go.mod go.sum ./
+COPY . .
 RUN go mod download
-COPY *.go ./
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
+RUN go build -o main ./cmd/main.go
 EXPOSE 5000
-CMD [".cmd/main"]
+CMD ["./main"]
